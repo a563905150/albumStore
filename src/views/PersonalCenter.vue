@@ -17,7 +17,7 @@
 						        <i class="el-icon-menu"></i>
 						        <span slot="title">修改密码</span>
 						      </el-menu-item>
-						      <el-menu-item index="3">
+						      <el-menu-item index="myOrder">
 						        <i class="el-icon-document"></i>
 						        <span slot="title">查看订单</span>
 						      </el-menu-item>
@@ -29,6 +29,7 @@
 						</el-aside>
 						<reset-pwd :init="initDate"></reset-pwd>
 						<addr-manage :init="initDate"></addr-manage>
+						<my-order :init="initDate"></my-order>
 					</el-container>
 				</div>
 			</el-col>
@@ -43,6 +44,7 @@
 	import NavBread from '@/components/NavBread'
 	import ResetPwd from '@/components/personalCenter/ResetPwd'
 	import AddrManage from '@/components/personalCenter/AddrManage'
+	import MyOrder from '@/components/personalCenter/MyOrder'
 	import axios from 'axios'
 	export default{
 		data(){
@@ -64,7 +66,8 @@
 			NavFooter,
 			NavBread,
 			ResetPwd,
-			AddrManage
+			AddrManage,
+			MyOrder
 		}
 	}
 </script>
