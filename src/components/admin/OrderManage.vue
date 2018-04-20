@@ -6,7 +6,7 @@
 		    stripe
 		    border
 		    style="width: 100%"
-		    height="509">
+		    height="541">
 		    <el-table-column
 		      fixed
 		      type="index">
@@ -49,7 +49,7 @@
 		    	align="center"
 		      prop="createDate"
 		      label="订单创建时间"
-		      width="250">
+		      width="220">
 		    </el-table-column>
 		    <!--<el-table-column
 		    	align="center"
@@ -65,11 +65,20 @@
 		      min-width
 		      label="操作">
 		      <template slot-scope="scope">
+		        <el-button type="primary" size="small" @click="">发货</el-button>
 		        <el-button type="primary" size="small" @click="">编辑</el-button>
 		        <el-button @click="" type="warning" size="small">删除</el-button>
 		      </template>
 		    </el-table-column>
 		</el-table>
+		<el-pagination
+		  background
+		  @current-change="currentChange"
+		  layout="prev, pager, next,total"
+		  :page-size="8"
+		  :total="total"
+		  style="display: inline-block;margin-left: 25%;">
+		</el-pagination>
     </el-main>
 </template>
 
@@ -96,12 +105,12 @@
 
 		},
 		methods:{
-			initTable(){
+			initTable(currentPage){
 				this.tableLoading = true;
 				axios.get('/admin/getOrderList',{
 					params:{
-						page:this.currentPage,
-						pageSize:5,
+						page:currentPage||1,
+						pageSize:8,
 					}
 				}).then((resp)=>{
 					let res = resp.data.result;
@@ -111,6 +120,10 @@
 						this.tableLoading = false;
 					},500);
 				})
+			},
+			currentChange(val){
+				this.currentPage = val;
+				this.initTable(val);
 			}
 		}
 	}

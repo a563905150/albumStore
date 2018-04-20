@@ -22,15 +22,25 @@
 	import NavHeader from '@/components/NavHeader'
 	import NavFooter from '@/components/NavFooter'
 	import NavBread from '@/components/NavBread'
+	import axios from 'axios'
 	export default{
 		data(){
 			return {
-				offset:2,
-				id:''
+				goodsDate:{},
+				offset:2
 			}
 		},
 		mounted(){
-			this.id = this.$route.query.id;
+			axios.get('/goods/getProductDetail',{
+				params:{
+					id:this.$route.query.id
+				}
+			}).then((resp) =>{
+				let res = resp.data.result;
+				this.goodsDate = res;
+				console.log(res);
+			})
+//			this.id = this.$route.query.id;
 		},
 		components:{
 			NavHeader,

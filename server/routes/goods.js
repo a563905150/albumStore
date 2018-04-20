@@ -420,5 +420,29 @@ router.post('/editProductDetailImg',(req,res,next) =>{
 })
 
 
+router.get('/getProductDetail',(req,res,next) =>{
+	let id = req.param('id');
+	Goods.findOne({_id:id},(err,Doc) =>{
+		if(err){
+			res.json({
+				status:1,
+				msg:err.message,
+				result:'err'
+			})
+		}else{
+			if(Doc){
+				res.json({
+					status:0,
+					msg:'suc',
+					result:Doc
+				})
+			}
+		}
+	})
+})
+
+
+
+
 
 module.exports = router;
