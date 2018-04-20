@@ -4,16 +4,32 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var svgCaptcha = require('svg-captcha');
 
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var goods = require('./routes/goods');
 var admins = require('./routes/admins');
-var bannerList = require('./routes/bannerList')
+var bannerList = require('./routes/bannerList');
 var app = express();
 
+app.get('/captcha', function (req, res) {
+	var codeConfig = {
+        size: 5,// 验证码长度
+        ignoreChars: '0o1i', // 验证码字符中排除 0o1i
+        noise: 2, // 干扰线条的数量
+        height: 44 
+    }
+	var captcha = svgCaptcha.create(codeConfig);
+	//req.session.captcha = captcha.text;
+	res.cookie('captcha',captcha.text.toLowerCase(),{
+		path:'/',
+		maxAge:1000*60*1
+	})
+//	res.type('svg');
+	res.status(200).send(captcha.data);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
