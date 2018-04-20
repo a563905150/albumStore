@@ -55,7 +55,8 @@ app.use((req,res,next)=>{
 		||req.originalUrl == '/goods/delGoods'||req.originalUrl == '/goods/addProduct'
 		||req.originalUrl == '/goods/editProduct'||req.path == '/users/usersList'
 		||req.originalUrl == '/users/delUser'||req.originalUrl == '/users/editUser'
-		||req.originalUrl == '/users/delPhoto'||req.originalUrl == '/users/getShippingMethods'){
+		||req.originalUrl == '/users/delPhoto'||req.originalUrl == '/users/getShippingMethods'
+		||req.originalUrl == '/users/mailValidation'){
 			next();
 		}else{
 			res.json({

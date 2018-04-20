@@ -44,7 +44,7 @@
             <div class="md-content">
               <div class="confirm-tips">
                 <div class="error-wrap">
-                  <span class="error error-show" v-show="errorTip">用户名或者密码错误</span>
+                  <span class="error error-show" v-show="errorTip" v-text="loginTip"></span>
                 </div>
                 <ul>
                   <li class="regi_form_input">
@@ -53,8 +53,13 @@
                   </li>
                   <li class="regi_form_input noMargin">
                     <i class="icon IconPwd"></i>
-                    <input type="password" tabindex="2"  name="password" v-model="userPwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="Password" @keyup.enter="toLogin('')">
+                    <input type="password" tabindex="2"  name="password" v-model="userPwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="Password">
                   </li>
+                  <li class="regi_form_input noMargin">
+                    <i class="icon IconPwd"></i>
+                    <input type="text" tabindex="2"  name="yzm" v-model="yzm" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="validationCode" @keyup.enter="toLogin('')">
+                  </li>
+                  <span v-html="validate" @click="getCaptcha"></span>
                 </ul>
               </div>
               <div class="login-wrap">
@@ -88,10 +93,19 @@
                     <i class="icon IconPwd"></i>
                     <input type="password" tabindex="3"  name="password" v-model="registerUserRePwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="RePassword" @keyup.enter="toRegister">
                   </li>
+                  <li class="regi_form_input noMargin">
+                    <i class="icon IconPwd"></i>
+                    <input type="text" tabindex="4"  name="mail" v-model="mail" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="Email" @keyup.enter="toRegister">
+                  </li>
+                  <li class="regi_form_input noMargin">
+                    <i class="icon IconPwd"></i>
+                    <input type="text" tabindex="5"  name="mailYzm" v-model="mailYzm" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="EmailValidationCode" @keyup.enter="toRegister">
+                  </li>
                 </ul>
               </div>
               <div class="login-wrap">
-                <a href="javascript:;" class="btn-login" @click="toRegister">注册</a>
+              	<a href="javascript:;" class="btn-login" @click="sendMail">点击发送验证码</a>
+                <a href="javascript:;" class="btn-login" @click="toRegister" style="margin-top: 10px;">注册</a>
               </div>
             </div>
           </div>
@@ -115,6 +129,9 @@
 export default {
  	data(){
  		return {
+ 			mail:'',
+ 			mailYzm:'',
+ 			loginTip:'',
  			userName:'',
  			userPwd:'',
  			errorTip:false,
@@ -127,7 +144,9 @@ export default {
  			registerModalFlag:false,
  			registerErrorTip:false,
  			cartNum:0,
- 			tip:''
+ 			tip:'',
+ 			yzm:'',
+ 			validate:''
  		}
  	},
  	props:['checkChange'],
@@ -148,8 +167,20 @@ export default {
  	},
 	methods:{
 		login(){
+			this.getCaptcha();
 			this.loginModalFlag = true;
    				
+		},
+		sendMail(){
+			axios.post('/users/mailValidation',{
+				mail:this.mail
+			})
+		},
+		getCaptcha(){
+			axios.get('/captcha').then((resp) =>{
+				let res = resp.data;
+				this.validate = res;
+			})
 		},
 		toLogin(param){
 			if(param){
@@ -161,8 +192,18 @@ export default {
    				})
 			}else{
 				if(!this.userName || !this.userPwd){
-				this.errorTip = true;
-				return;
+					this.errorTip = true;
+					this.loginTip = "请填写用户名、密码";
+					return;
+				}else if(!this.yzm){
+					this.errorTip = true;
+					this.loginTip = "请输入验证码";
+					return ;
+				}else if(this.yzm.toLowerCase() != this.getCookie("captcha")){
+					this.errorTip = true;
+					this.loginTip = "验证码错误，请重新输入";
+					this.getCaptcha();
+					return ;
 				}
 				axios.post('/users/login',{
    					userName:this.userName,
@@ -170,7 +211,7 @@ export default {
    				}).then((res)=>{
    					if(res.data.status == 1){
    						this.errorTip = true;
-   						
+   						this.loginTip = "用户名或密码错误，请重新输入";
    					}else{
    						this.user = res.data.result.userName;
    						this.cartNum = res.data.result.cartNum;

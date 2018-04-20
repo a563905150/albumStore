@@ -4,6 +4,7 @@ let User = require('./../models/user');
 let formidable = require('formidable');
 let path = require('path');
 let fs = require('fs');
+let nodemailer = require('nodemailer');
 require('./../utils/util');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -482,6 +483,55 @@ router.get('/orderDetail',(req,res,next)=>{
 		}
 	})
 })
+
+router.post('/mailValidation',(req,res,next) =>{
+	let mailNum = req.body.mail;
+	let randomNum =  Math.floor(Math.random()*100000);
+	let config = {
+        host: 'smtp.163.com', 
+        port: 465,
+        sercure: true,
+        auth: {
+            user: '17750406614@163.com', //刚才注册的邮箱账号
+            pass: 'xiaozhixin0'  //邮箱的授权码，不是注册时的密码
+        }
+    };
+    let mail = {
+    	// 发件人
+	    from: '相册商城官方<17750406614@163.com>',
+	    // 主题
+	    subject: '验证码',
+	    // 收件人
+	    to: mailNum,
+	    // 邮件内容，HTML格式
+	    text: '您的注册验证码为：'+randomNum.toString() //接收激活请求的链接
+    }
+    // 创建一个SMTP客户端对象
+	let transporter = nodemailer.createTransport(config);
+	transporter.sendMail(mail, function(error, info){
+        if(error) {
+            console.log(error);
+            res.json({
+        		status:1,
+        		msg:'发送失败',
+        		result:'发送失败'
+        	})
+        }else{
+        	console.log('mail sent:', info.response);
+        	res.cookie('mail',randomNum,{
+				path:'/',
+				maxAge:1000*60*1
+			})
+        	res.json({
+        		status:0,
+        		msg:'发送成功',
+        		result:'发送成功'
+        	})
+        }
+        
+    });
+})
+
 
 
 router.post('/register',(req,res,next)=>{
