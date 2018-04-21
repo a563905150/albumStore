@@ -7,11 +7,33 @@
 		<el-row :gutter='20'>
 			 <el-col :span="8" :offset="offset">
 				<div class="productImgWrapper">
-					<img src="../../build/logo.png" style="width: 100%;height: 100%;"/>
+					<img v-lazy="'../../static/'+goodsData.productImage" style="width: 100%;height: 100%;"/>
 				</div>
 			</el-col>
 			<el-col :span="12">
 				<div class="productEditWrapper"></div>
+			</el-col>
+		</el-row>
+		<div class="nav-breadcrumb-wrap" style="margin: 40px 0;">
+		  <div class="container" style="margin: 0 8%;">
+		    <nav class="nav-breadcrumb">
+		      <a href="javascript:void(0);">Detail</a>
+		      <slot></slot>
+		    </nav>
+		  </div>
+		</div>
+		<el-row :gutter='20'>
+			 <el-col :span="16" :offset="offset2">
+				<div class="detail-wrap">
+					{{goodsData.productDetail}}
+				</div>
+			</el-col>
+		</el-row>
+		<el-row :gutter='20'>
+			 <el-col :span="16" :offset="offset2">
+				<div>
+					<img v-for="item in goodsData.productDetailImg" v-lazy="'../../static/productImg/'+item.url" style="width: 100%;height: 100%;"/>
+				</div>
 			</el-col>
 		</el-row>
 		<nav-footer></nav-footer>
@@ -26,8 +48,9 @@
 	export default{
 		data(){
 			return {
-				goodsDate:{},
-				offset:2
+				goodsData:{},
+				offset:2,
+				offset2:4
 			}
 		},
 		mounted(){
@@ -37,7 +60,7 @@
 				}
 			}).then((resp) =>{
 				let res = resp.data.result;
-				this.goodsDate = res;
+				this.goodsData = res;
 				console.log(res);
 			})
 //			this.id = this.$route.query.id;
@@ -50,13 +73,17 @@
 	}
 </script>
 
-<style>
+<style scoped>
 .productImgWrapper{
-	background-color: lightpink;
+	box-shadow: 0 0 5px;
 	height: 400px;
 }
 .productEditWrapper{
 	height: 400px;
 	background-color: red;
+}
+.detail-wrap{
+	word-break:break-all;
+	
 }
 </style>

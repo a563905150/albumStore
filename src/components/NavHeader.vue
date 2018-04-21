@@ -104,7 +104,7 @@
                 </ul>
               </div>
               <div class="login-wrap">
-              	<a href="javascript:;" class="btn-login" @click="sendMail">点击发送验证码</a>
+              	<a href="javascript:;" class="btn-login" @click="sendMail" v-text="mailTip"></a>
                 <a href="javascript:;" class="btn-login" @click="toRegister" style="margin-top: 10px;">注册</a>
               </div>
             </div>
@@ -146,7 +146,8 @@ export default {
  			cartNum:0,
  			tip:'',
  			yzm:'',
- 			validate:''
+ 			validate:'',
+ 			time:'点击发送验证码'
  		}
  	},
  	props:['checkChange'],
@@ -155,6 +156,11 @@ export default {
  			if(this.getCookie('userId')){
  				this.toLogin(this.getCookie('userId'));
  			}
+ 		}
+ 	},
+ 	computed:{
+ 		mailTip(){
+ 			return this.time;
  		}
  	},
  	mounted(){
@@ -174,6 +180,18 @@ export default {
 		sendMail(){
 			axios.post('/users/mailValidation',{
 				mail:this.mail
+			}).then((resp) =>{
+				let res = resp.data.status;
+				if(res == 0){
+					this.time = 60;
+					let interval = setInterval(() =>{
+						this.time--;
+						if(this.time == 0){
+							clearInterval(interval);
+							this.time = '点击发送验证码';
+						}
+					},1000)
+				}
 			})
 		},
 		getCaptcha(){
@@ -258,6 +276,14 @@ export default {
 			}else if(this.registerUserPwd != this.registerUserRePwd){
 				this.registerErrorTip = true;
 				this.tip = '二次密码不一致，请重新输入！';
+				return ;
+			}else if(!this.mailYzm){
+				this.registerErrorTip = true;
+				this.tip = '请输入邮箱验证码！';
+				return ;
+			}else if(this.mailYzm != this.getCookie('mail')){
+				this.registerErrorTip = true;
+				this.tip = '邮箱验证码不正确,请重新发送！';
 				return ;
 			}
 			axios.post('/users/register',{

@@ -8,7 +8,7 @@
             <div class="md-content">
               <div class="confirm-tips">
                 <div class="error-wrap">
-                  <span class="error error-show" v-show="errorTip">用户名或者密码错误</span>
+                  <span class="error error-show" v-show="errorTip" v-text="tip"></span>
                 </div>
                 <ul>
                   <li class="regi_form_input">
@@ -19,6 +19,11 @@
                     <i class="icon IconPwd"></i>
                     <input type="password" tabindex="2"  name="password" v-model="userPwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="Password" @keydown.enter="login">
                   </li>
+                  <li class="regi_form_input noMargin">
+                    <i class="icon IconPwd"></i>
+                    <input type="text" tabindex="2"  name="yzm" v-model="yzm" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="validationCode" @keydown.enter="login">
+                  </li>
+                  <span v-html="validate" @click="getCaptcha"></span>
                 </ul>
               </div>
               <div class="login-wrap">
@@ -41,13 +46,28 @@
 				loginModalFlag:true,
 				errorTip:false,
 				userName:'',
-				userPwd:''
+				userPwd:'',
+				yzm:'',
+				validate:'',
+				tip:''
 			}
+		},
+		mounted(){
+			this.getCaptcha();
 		},
 		methods:{
 			login(){
 				if(!this.userName||!this.userPwd){
 					this.errorTip = true;
+					this.tip = '用户名或者密码错误';
+					return ;
+				}else if(!this.yzm){
+					this.errorTip = true;
+					this.tip = '请输入验证码';
+					return ;
+				}else if(this.yzm.toLowerCase() != this.getCookie('captcha')){
+					this.errorTip = true;
+					this.tip = '验证码输入错误';
 					return ;
 				}
 				axios.post('/admin/login',{
@@ -63,6 +83,22 @@
 						this.$router.push({path:'/admin'});
 					}
 				})
+			},
+			getCaptcha(){
+				axios.get('/captcha').then((resp) =>{
+					let res = resp.data;
+					this.validate = res;
+				})
+			},
+			getCookie(name){
+				let arr;
+	        	let reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+	       		if (arr = document.cookie.match(reg)){
+		        	return unescape(arr[2]);
+		        }else{
+		        	return null;
+		        }
+	         
 			}
 		}
 	}
