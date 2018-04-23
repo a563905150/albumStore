@@ -68,6 +68,7 @@
 				}else if(this.yzm.toLowerCase() != this.getCookie('captcha')){
 					this.errorTip = true;
 					this.tip = '验证码输入错误';
+					this.getCaptcha();
 					return ;
 				}
 				axios.post('/admin/login',{
@@ -78,6 +79,7 @@
 					console.log(res.msg);
 					if(res.status == 1){
 						this.errorTip = true;
+						this.tip = '用户名或者密码错误';
 					}else{
 						this.errorTip = false;
 						this.$router.push({path:'/admin'});

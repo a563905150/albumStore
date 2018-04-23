@@ -223,6 +223,85 @@ router.get('/getOrderList',(req,res,next)=>{
 })
 
 
+router.get('/getUserOrderList',(req,res,next)=>{
+	let page = req.param('page');
+	let id = req.cookies.userId;
+	let pageSize = parseInt(req.param('pageSize'));
+	let skip = (page-1)*pageSize;
+	let total = 0;
+	User.findOne({_id:id},(err,Doc)=>{
+		total = Doc.orderList.length;
+		res.json({
+			status:0,
+			msg:'suc',
+			result:{
+				total:total,
+				orderList:Doc.orderList.slice(skip,skip+pageSize)
+			}
+		})
+	});
+})
+
+
+router.post('/deliverGoods',(req,res,next) =>{
+	let userId = req.body.userId;
+	let orderId = req.body.orderId;
+	User.findOne({_id:userId},(err,Doc)=>{
+		Doc.orderList.forEach((item) =>{
+			if(item._id == orderId){
+				item.orderStatus = 2;
+			}
+		})
+		Doc.save((err1,Doc1) =>{
+			if(err1){
+				console.log(err1);
+				res.json({
+					status:1,
+					msg:err1.message,
+					result:'err'
+				})
+			}else{
+				res.json({
+					status:0,
+					msg:'suc',
+					result:'suc'
+				})
+			}
+		});
+	});
+})
+
+
+router.post('/takeDelivery',(req,res,next) =>{
+	let userId = req.body.userId;
+	let orderId = req.body.orderId;
+	User.findOne({_id:userId},(err,Doc)=>{
+		Doc.orderList.forEach((item) =>{
+			if(item._id == orderId){
+				item.orderStatus = 3;
+			}
+		})
+		Doc.save((err1,Doc1) =>{
+			if(err1){
+				console.log(err1);
+				res.json({
+					status:1,
+					msg:err1.message,
+					result:'err'
+				})
+			}else{
+				res.json({
+					status:0,
+					msg:'suc',
+					result:'suc'
+				})
+			}
+		});
+	});
+})
+
+
+
 
 
 module.exports = router;

@@ -417,6 +417,7 @@ router.post('/payMent',(req,res,next)=>{
 				let createDate = new Date().Format('yyyy-MM-dd hh:mm:ss');
 				let orderId = platform+r1+sysDate+r2;
 				let order = {
+					userId:userId,
 					orderId:orderId,
 					orderTotal:orderTotal,
 					addressInfo:addressInfo,
@@ -484,6 +485,29 @@ router.get('/orderDetail',(req,res,next)=>{
 	})
 })
 
+
+router.post('/delOrder',(req,res,next) =>{
+	let userId = req.cookies.userId;
+	let orderId = req.body.id;
+	User.update({_id:userId},{$pull:{'orderList':{_id:orderId}}},(err,Doc)=>{
+		if(err){
+			res.json({
+				status:1,
+				msg:err.message,
+				result:''
+			})
+		}else{
+			res.json({
+				status:0,
+				msg:"suc",
+				result:''
+			})
+		}
+	})
+})
+
+
+
 router.post('/mailValidation',(req,res,next) =>{
 	let mailNum = req.body.mail;
 	let randomNum =  Math.floor(Math.random()*100000);
@@ -500,11 +524,11 @@ router.post('/mailValidation',(req,res,next) =>{
     	// 发件人
 	    from: '相册商城官方<17750406614@163.com>',
 	    // 主题
-	    subject: '验证码',
+	    subject: '注册验证码',
 	    // 收件人
 	    to: mailNum,
 	    // 邮件内容，HTML格式
-	    text: '您的注册验证码为：'+randomNum.toString() //接收激活请求的链接
+	    text: '您好，您的注册验证码为：'+randomNum.toString() //接收激活请求的链接
     }
     // 创建一个SMTP客户端对象
 	let transporter = nodemailer.createTransport(config);

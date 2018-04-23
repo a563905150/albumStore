@@ -6,6 +6,7 @@ let userSchema = new mongoose.Schema({
 	"userPwd":String,
 	"orderList":[
 		{
+			"userId":String,
             "orderId" : String,
             "orderTotal" : Number,
             "addressInfo" : {

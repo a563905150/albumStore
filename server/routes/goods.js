@@ -249,6 +249,7 @@ router.post('/delGoods',(req,res,next)=>{
 router.post('/addCart',(req,res,next)=>{
 	let userId = req.cookies.userId;
 	let productId = req.body._id;
+	let productNum = req.body.productNum;
 	let User = require('../models/user');
 	User.findOne({_id:userId},(err,userDoc)=>{
 		if(err){
@@ -262,7 +263,11 @@ router.post('/addCart',(req,res,next)=>{
 				let item = '';
 				userDoc.cartList.forEach((productItem)=>{
 					if(productItem._id == productId){
-						productItem.productNum++;
+						if(productNum){
+							productItem.productNum = parseInt(productItem.productNum) + parseInt(productNum);
+						}else{
+							productItem.productNum++;
+						}
 						item = productItem;
 					}
 				})
@@ -291,7 +296,11 @@ router.post('/addCart',(req,res,next)=>{
 								result:'err'
 							})
 						}else{
-							goodsDoc.productNum = 1;
+							if(productNum){
+								goodsDoc.productNum = productNum;
+							}else{
+								goodsDoc.productNum = 1;
+							}
 							goodsDoc.checked = 1;
 							userDoc.cartList.push(goodsDoc);
 							userDoc.save((err3,doc1)=>{

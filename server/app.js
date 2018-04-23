@@ -25,7 +25,7 @@ app.get('/captcha', function (req, res) {
 	//req.session.captcha = captcha.text;
 	res.cookie('captcha',captcha.text.toLowerCase(),{
 		path:'/',
-		maxAge:1000*60*1
+		maxAge:1000*60*2
 	})
 //	res.type('svg');
 	res.status(200).send(captcha.data);

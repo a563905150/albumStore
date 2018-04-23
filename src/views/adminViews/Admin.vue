@@ -32,6 +32,10 @@
 				        <i class="el-icon-tickets"></i>
 				        <span slot="title">订单管理</span>
 				      </el-menu-item>
+				      <el-menu-item index="albumManage">
+				        <i class="el-icon-printer"></i>
+				        <span slot="title">相册管理</span>
+				      </el-menu-item>
 				      <el-menu-item index="bannerManage">
 				        <i class="el-icon-setting"></i>
 				        <span slot="title">广告管理</span>
@@ -65,6 +69,7 @@
 			<banner-manage :init="dataInit"></banner-manage>
 			<shipping-methods-manage :init="dataInit"></shipping-methods-manage>
 			<goods-detail-manage :init="dataInit"></goods-detail-manage>
+			<album-manage :init="dataInit"></album-manage>
 		  </el-container>
 		</el-container>
 	</div>
@@ -79,6 +84,7 @@
 	import BannerManage from '@/components/admin/BannerManage'
 	import ShippingMethodsManage from '@/components/admin/ShippingMethodsManage'
 	import GoodsDetailManage from '@/components/admin/GoodsDetailManage'
+	import AlbumManage from '@/components/admin/AlbumManage'
 	import axios from 'axios'
 	export default{
 	    data() {
@@ -115,7 +121,7 @@
 	    		axios.post('/admin/logout').then((res)=>{
 	    			console.log(res.data.msg);
 	    			if(res.data.status == 0){
-	    				this.login();
+	    				this.$router.push('/adminLogin');
 	    			}
 	    		})
 	    	},
@@ -154,7 +160,8 @@
 	    	OrderManage,
 	    	BannerManage,
 	    	ShippingMethodsManage,
-	    	GoodsDetailManage
+	    	GoodsDetailManage,
+	    	AlbumManage
 	    }
 	}
 </script>
