@@ -63,7 +63,6 @@
 				this.goodsData = res;
 				console.log(res);
 			})
-//			this.id = this.$route.query.id;
 		},
 		components:{
 			NavHeader,
@@ -83,6 +82,7 @@
 	background-color: red;
 }
 .detail-wrap{
+	font-size: 20px;
 	word-break:break-all;
 	
 }
