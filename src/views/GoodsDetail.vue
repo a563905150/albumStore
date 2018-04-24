@@ -33,10 +33,10 @@
 		                <div class="cart-tab-3">
 		                  <div class="item-quantity">
 		                    <div class="select-self select-self-open">
-		                      <div class="select-self-area" style="position: relative;">
-		                        <a class="input-sub" @click="decre" style="position: absolute;left: -15px;top: 0px;">-</a>
-		                        <span class="select-ipt" style="position: absolute;left: 10px;top: 0px;">{{goodsData.productNum}}</span>
-		                        <a class="input-add" @click="incre" style="position: absolute;right: -15px;top: 0px;">+</a>
+		                      <div class="select-self-area">
+		                        <a class="input-sub" @click="decre">-</a>
+		                        <span class="select-ipt">{{goodsData.productNum}}</span>
+		                        <a class="input-add" @click="incre">+</a>
 		                      </div>
 		                    </div>
 		                  </div>
@@ -169,4 +169,26 @@
 	word-break:break-all;
 	
 }
+	.input-sub,.input-add{
+    min-width: 40px;
+    height: 100%;
+    border: 0;
+    color: #605F5F;
+    text-align: center;
+    font-size: 16px;
+    overflow: hidden;
+    display: inline-block;
+    background: #f0f0f0;
+  }
+  .item-quantity .select-self-area{
+    background:none;
+    border: 1px solid #f0f0f0;
+  }
+  .item-quantity .select-self-area .select-ipt{
+    display: inline-block;
+    padding:0 3px;
+    width: 30px;
+    min-width: 30px;
+    text-align: center;
+  }
 </style>

@@ -301,6 +301,68 @@ router.post('/takeDelivery',(req,res,next) =>{
 })
 
 
+router.post('/delOrderAlbum',(req,res,next) =>{
+	let userId = req.body.userId;
+	let orderId = req.body.orderId;
+	let goodsId = req.body.goodsId;
+	let photoId = req.body.photoId;
+	User.findOne({_id:userId},(err,Doc) =>{
+		if(err){
+			res.json({
+				status:1,
+				msg:err.message,
+				result:''
+			})
+		}else{
+			Doc.orderList.forEach((item) =>{
+				if(item._id == orderId){
+					item.goodsList.forEach((item1) =>{
+						if(item1._id == goodsId){
+							item1.album.forEach((item2) =>{
+								if(item2._id == photoId){
+									item1.album.splice(item1.album.indexOf(item2),1)
+								}
+							})
+						}
+					})
+				}
+			})
+			Doc.save((err1,Doc1) =>{
+				if(err1){
+					res.json({
+						status:1,
+						msg:err1.message,
+						result:''
+					})
+				}else{
+					res.json({
+						status:0,
+						msg:'suc',
+						result:'suc'
+					})
+				}
+			})
+		}
+	})
+//	User.update({_id:userId,'orderList._id':orderId,'goodsList._id':goodsId},{$pull:{'orderList.$.goodsLst.$.album':{_id:photoId}}},(err,Doc)=>{
+//		if(err){
+//			res.json({
+//				status:1,
+//				msg:err.message,
+//				result:''
+//			})
+//		}else{
+//			res.json({
+//				status:0,
+//				msg:"suc",
+//				result:''
+//			})
+//		}
+//	})
+})
+
+
+
 
 
 

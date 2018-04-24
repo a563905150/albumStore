@@ -74,7 +74,7 @@
 		      label="操作">
 		      <template slot-scope="scope">
 		        <el-button type="primary" size="small" @click="deliverGoods(scope.row)">发货</el-button>
-		        <el-button @click="delOrder(scope.row._id)" type="warning" size="small">删除</el-button>
+		        <el-button @click="delOrder(scope.row)" type="warning" size="small">删除</el-button>
 		      </template>
 		    </el-table-column>
 		</el-table>
@@ -154,14 +154,15 @@
 				}
 				
 			},
-			delOrder(id){
+			delOrder(row){
 				this.$confirm('此操作将永久删除该订单, 是否继续?', '提示', {
 		          confirmButtonText: '确定',
 		          cancelButtonText: '取消',
 		          type: 'warning'
 		        }).then(() => {
 		        	axios.post('/users/delOrder',{
-		        		id:id
+		        		userId:row.userId,
+		        		orderId:row._id
 		        	}).then((resp)=>{
 		        		let res = resp.data.msg;
 		        		this.initTable(this.currentPage);

@@ -487,8 +487,8 @@ router.get('/orderDetail',(req,res,next)=>{
 
 
 router.post('/delOrder',(req,res,next) =>{
-	let userId = req.cookies.userId;
-	let orderId = req.body.id;
+	let userId = req.body.userId;
+	let orderId = req.body.orderId;
 	User.update({_id:userId},{$pull:{'orderList':{_id:orderId}}},(err,Doc)=>{
 		if(err){
 			res.json({
