@@ -362,6 +362,9 @@ router.post('/delOrderAlbum',(req,res,next) =>{
 })
 
 
+router.post('/addOrderAlbum',(req,res,next) =>{
+	
+})
 
 
 
