@@ -23,7 +23,7 @@
 		            <ul class="cart-item-list">
 		              <li>
 		                <div class="cart-tab-1">
-		                  <div class="cart-item-title" style="cursor: pointer;">
+		                  <div class="cart-item-title">
 		                    <div class="item-name" style="text-align: center;">{{goodsData.productName}}</div>
 		                  </div>
 		                </div>
