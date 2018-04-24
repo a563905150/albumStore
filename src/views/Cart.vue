@@ -320,7 +320,6 @@ export default {
 			}
 		},
 		handleRemove(file, fileList) {
-			
 			console.log(file);
 				if(file.status == 'success'){
 					axios.post('/users/delPhoto',{
@@ -332,6 +331,7 @@ export default {
 						this.init();
 					})
 				}
+				this.fileList = fileList;
         this.fileListCount = fileList.length;
     },
     handlePictureCardPreview(file) {
@@ -366,7 +366,8 @@ export default {
     		}
     		
     	})
-    	if(index == 24){
+    	console.log(this.fileList.length);
+    	if(index == this.fileList.length-1){
 	    		this.$alert('目前已是最后一张照片！', '错误！', {
 				          confirmButtonText: '确定'
 				  });
@@ -393,6 +394,7 @@ export default {
     	this.fileList = album;
     },
     photoChange(file,fileList){
+    	this.fileList = fileList;
     	this.fileListCount = fileList.length;
     },
     limitAlert(file,fileList){

@@ -3,6 +3,10 @@ let router = express.Router();
 let Admin = require('./../models/admins');
 let ShippingMethods = require('./../models/shippingMethods');
 let User = require('./../models/user');
+let formidable = require('formidable');
+let path = require('path');
+let fs = require('fs');
+
 
 router.post('/login',(req,res,next)=>{
 		if(req.body.userId){
@@ -363,7 +367,85 @@ router.post('/delOrderAlbum',(req,res,next) =>{
 
 
 router.post('/addOrderAlbum',(req,res,next) =>{
-	
+	var uploadDir='static/album/';
+	var form=new formidable.IncomingForm();
+		 //文件的编码格式
+	 form.encoding='utf-8';
+	 //文件的上传路径
+	 form.uploadDir=uploadDir;
+	 //文件的后缀名
+	 form.extensions=true;
+	 //文件的大小限制
+	 form.maxFieldsSize = 1024 * 1024 * 1024;
+	 form.parse(req, function (err, fields, files) {
+	 //fields上传的string类型的信息
+	 //files为上传的文件
+	   let userId = fields.userId;
+	   let orderId = fields._id;
+	   let goodsId = fields.goodsId;
+	   var file=files.file;
+	 
+	   var oldpath=path.normalize(file.path);//返回正确格式的路径
+	   var r = Math.floor(Math.random()*100000000);
+	   var newfilename=r+file.name;
+	   var newpath=uploadDir+newfilename;
+	   var index = 0;
+	   var index1 = 0;
+	   //写入数据库的信息
+	  var album={
+	   		'url':newfilename
+	  };
+	 fs.rename(oldpath,newpath,function(err){
+	   if(err){
+	    console.error("失败"+err.message);
+	   }
+	   else {
+	     User.findOne({_id:userId},(err1,Doc)=>{
+	     	if(err1){
+	     		res.json({
+	     			status:1,
+	     			msg:err1.message,
+	     			result:'err'
+	     		})
+	     	}else{
+	     		if(Doc){
+	     			Doc.orderList.forEach((item)=>{
+	     				if(item._id == orderId){
+	     					index = Doc.orderList.indexOf(item);
+	     					item.goodsList.forEach((item1) =>{
+	     						if(item1._id == goodsId){
+	     							item1.album.push(album);
+	     							index1 = item.goodsList.indexOf(item1);
+	     						}
+	     					})
+	     				}
+	     			})
+	     			Doc.save((err2,Doc1)=>{
+	     				if(err2){
+	     					res.json({
+	     						status:1,
+	     						msg:err2.message,
+	     						result:'err'
+	     					})
+	     				}else{
+	     					res.json({
+	     						status:0,
+	     						msg:'suc',
+	     						result:{
+	     							_id:Doc1.orderList[index].goodsList[index1].album[Doc1.orderList[index].goodsList[index1].album.length-1]._id,
+	     							count:Doc1.orderList[index].goodsList[index1].album.length
+	     						}
+	     					})
+	     				}
+	     			})
+	     		}
+	     	}
+	     })
+	   }
+	  });
+	  //将老的图片路径改为新的图片路径
+
+	 })
 })
 
 

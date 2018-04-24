@@ -74,7 +74,7 @@
 		  	:data= "orderItemId"
 		  	ref="upload"
 		  	:auto-upload="false"
-			  action=""
+			  action="/admin/addOrderAlbum"
 			  list-type="picture-card"
 			  :on-change="photoChange"
 			  :on-preview="handlePictureCardPreview"
@@ -109,7 +109,9 @@
 				uploadLimitCount:25,
 				fileList:[],
 				orderItemId:{
-					_id:''
+					_id:'',
+					userId:'',
+					goodsId:''
 				},
 				currentPhoto:'',
 				dialogImageUrl:'',
@@ -158,6 +160,8 @@
 			editAlbum(item,row){
 				this.dialogAddPhotoVisible = true;
 		    	this.orderItemId._id = row._id;
+		    	this.orderItemId.userId = row.userId;
+		    	this.orderItemId.goodsId = item._id;
 		    	this.userId = row.userId;
 		    	this.goodsItemId = item._id;
 		    	this.fileListCount = item.album.length;
@@ -188,6 +192,7 @@
 			  	});
 	    	},
 	    	photoChange(file,fileList){
+	    		this.fileList = fileList;
 		    	this.fileListCount = fileList.length;
 		    },
 		    handlePictureCardPreview(file) {
@@ -210,6 +215,7 @@
 						this.initTable();
 					})
 				}
+				this.fileList = fileList;
 		        this.fileListCount = fileList.length;
 		    },
 		    addPhotoConfirm(){
@@ -242,7 +248,7 @@
 		    		}
 		    		
 		    	})
-		    	if(index == 24){
+		    	if(index == this.fileList.length-1){
 			    		this.$alert('目前已是最后一张照片！', '错误！', {
 						          confirmButtonText: '确定'
 						  });
