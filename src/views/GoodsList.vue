@@ -12,7 +12,7 @@
 		      <span class="sortby">排序方式:</span>
 		      <a href="javascript:void(0)" class="default" :class="{'cur':defaultCur}" @click="toDefaultCur">默认</a>
 		      <a href="javascript:void(0)" class="price" :class="{'cur':priceCur}" @click="sortGoods">价格 <img src="../assets/cc-arrow-down.svg" alt=""v-if="!sortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="sortFlag"/></a>
-		      <a href="javascript:void(0)" class="price" :class="{'cur':timeCur}" @click="TimeSort">添加时间 <img src="../assets/cc-arrow-down.svg" alt=""v-if="!timeSortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="timeSortFlag"/></a>
+		      <a href="javascript:void(0)" class="price" :class="{'cur':timeCur}" @click="TimeSort">最新 <img src="../assets/cc-arrow-down.svg" alt=""v-if="!timeSortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="timeSortFlag"/></a>
 		      <a href="javascript:void(0)" class="price" :class="{'cur':numCur}" @click="numSort">销售数量 <img src="../assets/cc-arrow-down.svg" alt=""v-if="!numSortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="numSortFlag"/></a>
 		      <a href="javascript:void(0)" class="filterby stopPop" @click="showFilter">筛 选</a>
 		    </div>
@@ -52,8 +52,9 @@
 		              </div>
 		            </li>
 		          </ul>
+		          	<div style="margin-left: 40%; margin-top: 20%;" v-if="noGoods">暂 无 商 品....</div>
 					<el-pagination
-					  v-show="!loading"
+					  v-show="!loading&&!noGoods"
 					  background
 					  :current-page="page"
 					  @current-change="currentChange"
@@ -62,7 +63,7 @@
 					  :total="total"
 					  style="display: inline-block;margin-left: 25%;">
 					</el-pagination>
-					<img src="../assets/loading-spinning-bubbles.svg" v-show="loading" style="margin-left: 40%;"/>
+					<img src="../assets/loading-spinning-bubbles.svg" v-show="loading" style="margin-left: 40%;margin-top: 20%;"/>
 		          <!--<div style="text-align: center;" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="30">
   						<img src="../assets/loading-spinning-bubbles.svg" v-show="loading"/>
 				  </div>-->
@@ -153,7 +154,8 @@
 				mdShowCart:false,
 				checkChange:'',
 				searchValue:'',
-				total:0
+				total:0,
+				noGoods:false
 			}
 		},
 		components: {
@@ -168,7 +170,7 @@
 		},
 		methods: {
 			getGoodsList(sort){
-				
+				this.noGoods = false;
 				let params = {
 					page: this.page,
 					pageSize: this.pageSize,
@@ -200,8 +202,12 @@
 //									this.busy = true;
 //								}
 //							}
-						this.goodsList = res.list;
-							
+							this.goodsList = res.list;
+							if(this.goodsList.length == 0){
+								this.noGoods = true;
+							}else{
+								this.noGoods = false;
+							}
 						}else{
 							console.log(result.msg);
 						}
