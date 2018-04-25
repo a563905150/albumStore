@@ -2,7 +2,7 @@
 	<div>
 		<nav-header></nav-header>
 		<nav-bread>
-			<span>Order Success</span>
+			<span>下单成功</span>
 		</nav-bread>
 		<div class="container">
 		    <div class="page-title-normal">
@@ -11,27 +11,27 @@
 		    <!-- 进度条 -->
 		    <div class="check-step">
 		      <ul>
-		        <li class="cur"><span>Confirm</span> address</li>
-		        <li class="cur"><span>View your</span> order</li>
-		        <li class="cur"><span>Make</span> payment</li>
-		        <li class="cur"><span>Order</span> confirmation</li>
+		        <li class="cur"><span>选&nbsp;择</span> 地&nbsp;址</li>
+		        <li class="cur"><span>查&nbsp;看</span> 订&nbsp;单</li>
+		        <li class="cur"><span>确&nbsp;认</span> 付&nbsp;款</li>
+		        <li class="cur"><span>订&nbsp;单</span> 确&nbsp;认</li>
 		      </ul>
 		    </div>
 		
 		    <div class="order-create">
 		      <div class="order-create-pic"><img src="../../static/ok-2.png" alt=""></div>
 		      <div class="order-create-main">
-		        <h3>Congratulations! <br>Your order is under processing!</h3>
+		        <h3>感谢您的惠顾！ <br>您的订单正在处理中！</h3>
 		        <p>
-		          <span>Order ID：{{orderId}}</span>
-		          <span>Order total：{{orderTotal}}</span>
+		          <span>订单号：{{orderId}}</span>
+		          <span>订单总额：{{orderTotal}}</span>
 		        </p>
 		        <div class="order-create-btn-wrap">
 		          <div class="btn-l-wrap">
-		            <router-link class="btn btn--m" to="/cart">Cart List</router-link>
+		            <router-link class="btn btn--m" to="/cart">返回购物车列表</router-link>
 		          </div>
 		          <div class="btn-r-wrap">
-		            <router-link  class="btn btn--m" to="/">Goods List</router-link>
+		            <router-link  class="btn btn--m" to="/">返回商品列表</router-link>
 		          </div>
 		        </div>
 		      </div>

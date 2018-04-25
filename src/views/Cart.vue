@@ -2,7 +2,7 @@
   <div>
   	<nav-header :checkChange="checkChange"></nav-header>
   	<nav-bread>
-  		<span>My Cart</span>
+  		<span>购物车</span>
   	</nav-bread>
     <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"
          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -51,12 +51,12 @@
           <div class="cart-item">
             <div class="cart-item-head">
               <ul>
-                <li>Items</li>
-                <li>Price</li>
-                <li>Quantity</li>
-                <li>Subtotal</li>
-                <li>Edit</li>
-                <li>Add Photo</li>
+                <li>商品</li>
+                <li>价格</li>
+                <li>数量</li>
+                <li>总价</li>
+                <li>编辑</li>
+                <li>添加相册</li>
               </ul>
             </div>
             <ul class="cart-item-list">
@@ -107,7 +107,7 @@
 		                <i class="icon-add">
 		                  <svg class="icon icon-add" style="width: 50px;height: 90px;"><use xlink:href="#icon-add"></use></svg>
 		                </i>
-		                <p>Add New Photo</p>
+		                <p>&nbsp;&nbsp;添加新相片&nbsp;&nbsp;</p>
 	              	</div>
                 </div>
               </li>
@@ -122,16 +122,16 @@
                   <span class="checkbox-btn item-check-btn" :class="{'check':checkAllShow}">
                       <svg class="icon icon-ok"><use xlink:href="#icon-ok"/></svg>
                   </span>
-                  <span>Select all</span>
+                  <span>选择全部</span>
                 </a>
               </div>
             </div>
             <div class="cart-foot-r">
               <div class="item-total">
-                Item total: <span class="total-price">{{totalPrice | currency("$")}}</span>
+                所选商品总价: <span class="total-price">{{totalPrice | currency("$")}}</span>
               </div>
               <div class="btn-wrap">
-                <a class="btn btn--red" :class="{'btn--dis':checkCount==0}" @click="checkOut">Checkout</a>
+                <a class="btn btn--red" :class="{'btn--dis':checkCount==0}" @click="checkOut">&nbsp;&nbsp;&nbsp;&nbsp;付&nbsp;&nbsp;款&nbsp;&nbsp;&nbsp;&nbsp;</a>
               </div>
             </div>
           </div>

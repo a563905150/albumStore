@@ -2,7 +2,7 @@
 		<div class="nav-breadcrumb-wrap">
 		  <div class="container">
 		    <nav class="nav-breadcrumb">
-		      <a href="javascript:void(0);" @click="toHome">Home</a>
+		      <a href="javascript:void(0);" @click="toHome">主页</a>
 		      <slot></slot>
 		    </nav>
 		  </div>

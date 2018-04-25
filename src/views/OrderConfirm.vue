@@ -2,9 +2,9 @@
   <div>
   	<nav-header></nav-header>
   	<nav-bread>
-  		<router-link to="/cart">My Cart</router-link>
-			<router-link to="/address">My Address</router-link>
-  		<span>Order Confirm</span>
+  		<router-link to="/cart">购物车</router-link>
+			<router-link to="/address">选择地址</router-link>
+  		<span>查看订单</span>
   	</nav-bread>
 		<div>
 		  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -39,25 +39,25 @@
 		      <!-- process step -->
 		      <div class="check-step">
 		        <ul>
-		          <li class="cur"><span>Confirm</span> address</li>
-		          <li class="cur"><span>View your</span> order</li>
-		          <li><span>Make</span> payment</li>
-		          <li><span>Order</span> confirmation</li>
+		          <li class="cur"><span>选&nbsp;择</span> 地&nbsp;址</li>
+		          <li class="cur"><span>查&nbsp;看</span> 订&nbsp;单</li>
+		          <li><span>确&nbsp;认</span> 付&nbsp;款</li>
+		          <li><span>订&nbsp;单</span> 确&nbsp;认</li>
 		        </ul>
 		      </div>
 		
 		      <!-- order list -->
 		      <div class="page-title-normal checkout-title">
-		        <h2><span>Order content</span></h2>
+		        <h2><span>订&nbsp;单&nbsp;详&nbsp;情</span></h2>
 		      </div>
 		      <div class="item-list-wrap confirm-item-list-wrap">
 		        <div class="cart-item order-item">
 		          <div class="cart-item-head">
 		            <ul>
-		              <li>Order contents</li>
-		              <li>Price</li>
-		              <li>Quantity</li>
-		              <li>Subtotal</li>
+		              <li>订&nbsp;单&nbsp;内&nbsp;容</li>
+		              <li>价&nbsp;格</li>
+		              <li>数&nbsp;量</li>
+		              <li>总&nbsp;价</li>
 		            </ul>
 		          </div>
 		          <ul class="cart-item-list">
@@ -97,11 +97,11 @@
 		        <div class="price-count">
 		          <ul>
 		            <li>
-		              <span>Item subtotal:</span>
+		              <span>商&nbsp;品&nbsp;总&nbsp;价:</span>
 		              <span>{{subTotal|currency("$")}}</span>
 		            </li>
 		            <li>
-		              <span>Shipping:</span>
+		              <span>运&nbsp;&nbsp;费:</span>
 		              <span>{{shipping|currency("$")}}</span>
 		            </li>
 		            <!--<li>
@@ -113,7 +113,7 @@
 		              <span>{{tax|currency("$")}}</span>
 		            </li>-->
 		            <li class="order-total-price">
-		              <span>Order total:</span>
+		              <span>订&nbsp;单&nbsp;总&nbsp;价:</span>
 		              <span>{{orderTotal|currency("$")}}</span>
 		            </li>
 		          </ul>
@@ -123,7 +123,7 @@
 		      <div class="order-foot-wrap">
 		        <div class="prev-btn-wrap">
 		          <!--<button class="btn btn--m">Previous</button>-->
-		          <router-link class="btn btn--m" to="/address">Previous</router-link>
+		          <router-link class="btn btn--m" to="/address">&nbsp;返&nbsp;回&nbsp;上&nbsp;一&nbsp;步&nbsp;</router-link>
 		        </div>
 		        <div class="next-btn-wrap">
 		          <button class="btn btn--m btn--red" @click="payMent">Proceed to payment</button>

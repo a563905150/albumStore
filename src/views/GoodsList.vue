@@ -9,26 +9,26 @@
 		<div class="accessory-result-page accessory-page">
 		  <div class="container">
 		    <div class="filter-nav">
-		      <span class="sortby">Sort by:</span>
-		      <a href="javascript:void(0)" class="default" :class="{'cur':defaultCur}" @click="toDefaultCur">Default</a>
-		      <a href="javascript:void(0)" class="price" :class="{'cur':priceCur}" @click="sortGoods">Price <img src="../assets/cc-arrow-down.svg" alt=""v-if="!sortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="sortFlag"/></a>
-		      <a href="javascript:void(0)" class="price" :class="{'cur':timeCur}" @click="TimeSort">addTime <img src="../assets/cc-arrow-down.svg" alt=""v-if="!timeSortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="timeSortFlag"/></a>
-		      <a href="javascript:void(0)" class="price" :class="{'cur':numCur}" @click="numSort">saleNum <img src="../assets/cc-arrow-down.svg" alt=""v-if="!numSortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="numSortFlag"/></a>
-		      <a href="javascript:void(0)" class="filterby stopPop" @click="showFilter">Filter by</a>
+		      <span class="sortby">排序方式:</span>
+		      <a href="javascript:void(0)" class="default" :class="{'cur':defaultCur}" @click="toDefaultCur">默认</a>
+		      <a href="javascript:void(0)" class="price" :class="{'cur':priceCur}" @click="sortGoods">价格 <img src="../assets/cc-arrow-down.svg" alt=""v-if="!sortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="sortFlag"/></a>
+		      <a href="javascript:void(0)" class="price" :class="{'cur':timeCur}" @click="TimeSort">添加时间 <img src="../assets/cc-arrow-down.svg" alt=""v-if="!timeSortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="timeSortFlag"/></a>
+		      <a href="javascript:void(0)" class="price" :class="{'cur':numCur}" @click="numSort">销售数量 <img src="../assets/cc-arrow-down.svg" alt=""v-if="!numSortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="numSortFlag"/></a>
+		      <a href="javascript:void(0)" class="filterby stopPop" @click="showFilter">筛 选</a>
 		    </div>
 		    <div class="accessory-result">
 		      <!-- filter -->
 		      <div class="filter stopPop" :class="{'filterby-show':filterBy}" id="filter">
 		        <dl class="filter-price">
-		          <dt>Price:</dt>
-		          <dd><a href="javascript:void(0)":class="{cur:priceChecked=='all'}" @click="priceCheckedAndFilterHidden('all')">All</a></dd>
+		          <dt>价格:</dt>
+		          <dd><a href="javascript:void(0)":class="{cur:priceChecked=='all'}" @click="priceCheckedAndFilterHidden('all')">全部</a></dd>
 		          <dd v-for="(value,index) in priceFilter">
 		            <a href="javascript:void(0)" :class="{cur:priceChecked==index}" @click="priceCheckedAndFilterHidden(index)">{{value.startPrice|currency("$")}}—{{value.endPrice|currency("$")}}</a>
 		          </dd>
 		        </dl>
 		        <dl class="filter-price">
-		          <dt>theme:</dt>
-		          <dd><a href="javascript:void(0)":class="{cur:themeChecked=='all'}" @click="themeCheckedAndFilterHidden('all')">All</a></dd>
+		          <dt>主题:</dt>
+		          <dd><a href="javascript:void(0)":class="{cur:themeChecked=='all'}" @click="themeCheckedAndFilterHidden('all')">全部</a></dd>
 		          <dd v-for="(value,index) in productType">
 		            <a href="javascript:void(0)" :class="{cur:themeChecked==index}" @click="themeCheckedAndFilterHidden(index)">{{value}}</a>
 		          </dd>

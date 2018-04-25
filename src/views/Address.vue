@@ -2,8 +2,8 @@
 	<div>
 		<nav-header></nav-header>
 		<nav-bread>
-			<router-link to="/cart">My Cart</router-link>
-			<span>My Address</span>
+			<router-link to="/cart">购物车</router-link>
+			<span>选择地址</span>
 		</nav-bread>
 		<div class="checkout-page">
 	  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -47,25 +47,25 @@
 	      <!-- process step -->
 	      <div class="check-step">
 	        <ul>
-	          <li class="cur"><span>Confirm</span> address</li>
-	          <li><span>View your</span> order</li>
-	          <li><span>Make</span> payment</li>
-	          <li><span>Order</span> confirmation</li>
+	          <li class="cur"><span>选&nbsp;择</span> 地&nbsp;址</li>
+	          <li><span>查&nbsp;看</span> 订&nbsp;单</li>
+	          <li><span>确&nbsp;认</span> 付&nbsp;款</li>
+	          <li><span>订&nbsp;单</span> 确&nbsp;认</li>
 	        </ul>
 	      </div>
 	
 	      <!-- address list -->
 	      <div class="page-title-normal checkout-title">
-	        <h2><span>Shipping address</span></h2>
+	        <h2><span>配&nbsp;送 地&nbsp;址</span></h2>
 	      </div>
 	      <div class="addr-list-wrap">
 	        <div class="addr-list">
 	          <ul>
-	            <li v-for="(item,index) in addressListFliter" :class="{'check':item.isDefault||checkIndex==index}" @click="checkIndex=index;selectAddrId=item._id">
+	            <li v-for="(item,index) in addressListFliter" :class="{'check':checkIndex==index}" @click="checkIndex=index;selectAddrId=item._id">
 	              <dl>
-	                <dt>userName: {{item.userName}}</dt>
-	                <dd class="address">address: {{item.streetName}}</dd>
-	                <dd class="tel">tel: {{item.tel}}</dd>
+	                <dt>姓名: {{item.userName}}</dt>
+	                <dd class="address">住址: {{item.streetName}}</dd>
+	                <dd class="tel">手机号码: {{item.tel}}</dd>
 	              </dl>
 	              <div class="addr-opration addr-del">
 	                <a href="javascript:;" class="addr-del-btn" @click="delAddress(item._id)">
@@ -73,16 +73,16 @@
 	                </a>
 	              </div>
 	              <div class="addr-opration addr-set-default">
-	                <a href="javascript:;" class="addr-set-default-btn" v-if="!item.isDefault" @click="setDefault(item._id)"><i>Set default</i></a>
+	                <a href="javascript:;" class="addr-set-default-btn" v-if="!item.isDefault" @click="setDefault(item._id)"><i>设为&nbsp;默认</i></a>
 	              </div>
-	              <div class="addr-opration addr-default" v-if="item.isDefault">Default address</div>
+	              <div class="addr-opration addr-default" v-if="item.isDefault">默&nbsp;认&nbsp;地&nbsp;址</div>
 	            </li>
 	            <li class="addr-new" @click="addAddress">
 	              <div class="add-new-inner">
 	                <i class="icon-add">
 	                  <svg class="icon icon-add"><use xlink:href="#icon-add"></use></svg>
 	                </i>
-	                <p>Add new address</p>
+	                <p>新&nbsp;增&nbsp;地&nbsp;址</p>
 	              </div>
 	            </li>
 	          </ul>
@@ -90,7 +90,7 @@
 	
 	        <div class="shipping-addr-more">
 	          <a class="addr-more-btn up-down-btn" href="javascript:;" @click="expand" :class="{'open':limit>3}">
-	            more
+	            更&nbsp;多
 	            <i class="i-up-down">
 	              <i class="i-up-down-l"></i>
 	              <i class="i-up-down-r"></i>
@@ -101,7 +101,7 @@
 	
 	      <!-- shipping method-->
 	      <div class="page-title-normal checkout-title">
-	        <h2><span>Shipping method</span></h2>
+	        <h2><span>配&nbsp;送 方&nbsp;式</span></h2>
 	      </div>
 	      <div class="shipping-method-wrap">
 	        <div class="shipping-method">
@@ -110,14 +110,14 @@
 	              <div class="name">{{item.shippingName}}</div>
 	              <div class="price">{{item.shippingPrice|currency('$')}}</div>
 	              <div class="shipping-tips">
-	                <p>Once shipped，Order should arrive in the destination in {{item.shippingDate}} business days</p>
+	                <p>一 旦 发 货，订 单 将 在 {{item.shippingDate}} 个 工 作 日 到 达 目 的 地</p>
 	              </div>
 	            </li>
 	          </ul>
 	        </div>
 	      </div>
 	      <div class="next-btn-wrap">
-	        <router-link class="btn btn--m btn--red" :to="{path:'/orderConfirm',query:{'addressId':selectAddrId,'shippingMethodId':shippingMethodId,'shippingPrice':shippingPrice}}">Next</router-link>
+	        <router-link class="btn btn--m btn--red" :to="{path:'/orderConfirm',query:{'addressId':selectAddrId,'shippingMethodId':shippingMethodId,'shippingPrice':shippingPrice}}">下一步</router-link>
 	      </div>
 	    </div>
 	  </div>
@@ -125,7 +125,7 @@
 	<div class="md-modal modal-msg md-modal-transition" v-bind:class="{'md-show':addAddrModalFlag}">
       <div class="md-modal-inner">
         <div class="md-top">
-          <div class="md-title">Add new address</div>
+          <div class="md-title">新&nbsp;增&nbsp;地&nbsp;址</div>
           <button class="md-close" @click="addAddrModalFlag=false">Close</button>
         </div>
         <div class="md-content">
@@ -136,19 +136,19 @@
             <ul>
               <li class="regi_form_input">
                 <i class="icon IconPeople"></i>
-                <input type="text" tabindex="1" v-model="userName" name="loginname" class="regi_login_input regi_login_input_left" placeholder="User Name" data-type="loginname">
+                <input type="text" tabindex="1" v-model="userName" name="loginname" class="regi_login_input regi_login_input_left" placeholder="姓名" data-type="loginname">
               </li>
               <li class="regi_form_input">
                 <img src="../assets/tel.svg" alt="" style="position: absolute;left: 10px;top: 5px;"/>
-                <input type="text" tabindex="1" v-model="telephone" name="loginname" class="regi_login_input regi_login_input_left" placeholder="Telephone" data-type="loginname">
+                <input type="text" tabindex="1" v-model="telephone" name="loginname" class="regi_login_input regi_login_input_left" placeholder="手机号" data-type="loginname">
               </li>
               <li class="regi_form_input">
                 <img src="../assets/address.svg" alt="" style="position: absolute;left: 10px;top: 5px;"/>
-                <input type="text" tabindex="1" v-model="address" name="loginname" class="regi_login_input regi_login_input_left" placeholder="Address" data-type="loginname">
+                <input type="text" tabindex="1" v-model="address" name="loginname" class="regi_login_input regi_login_input_left" placeholder="地址" data-type="loginname">
               </li>
               <li class="regi_form_input noMargin">
                 <img src="../assets/post.svg" alt="" style="position: absolute;left: 10px;top: 5px;"/>
-                <input type="text" tabindex="2" v-model="postCode" name="password" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="post Code">
+                <input type="text" tabindex="2" v-model="postCode" name="password" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="邮编">
               </li>
             </ul>
           </div>

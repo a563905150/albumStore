@@ -2,7 +2,7 @@
 	<div>
 		<nav-header></nav-header>
 		<nav-bread>
-			<span>Center</span>
+			<span>个人中心</span>
 		</nav-bread>
 		<el-row>
 			<el-col :span="20" :offset="offset">

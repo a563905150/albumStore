@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<nav-header></nav-header>
+		<nav-header :checkChange="checkChange"></nav-header>
 		<nav-bread>
-			<span>GoodsDetail</span>
+			<span>商品详情</span>
 		</nav-bread>
 		<el-row :gutter='20'>
 			 <el-col :span="6" :offset="offset">
@@ -15,9 +15,9 @@
 		          <div class="cart-item">
 		            <div class="cart-item-head">
 		              <ul>
-		                <li>Name</li>
-		                <li>Price</li>
-		                <li>Quantity</li>
+		                <li>商品名称</li>
+		                <li>商品价格</li>
+		                <li>商品数量</li>
 		              </ul>
 		            </div>
 		            <ul class="cart-item-list">
@@ -49,10 +49,10 @@
 		          <div class="cart-foot-inner">
 		            <div class="cart-foot-r">
 		              <div class="item-total">
-		                Item total: <span class="total-price">{{(goodsData.salePrice*goodsData.productNum) | currency('$')}}</span>
+		                商品总价: <span class="total-price">{{(goodsData.salePrice*goodsData.productNum) | currency('$')}}</span>
 		              </div>
 		              <div class="btn-wrap">
-		                <a class="btn btn--red" @click="addCart">AddCart</a>
+		                <a class="btn btn--red" @click="addCart">&nbsp;加入购物车&nbsp;</a>
 		              </div>
 		            </div>
 		          </div>
@@ -62,8 +62,8 @@
 		<div class="nav-breadcrumb-wrap" style="margin: 40px 0;">
 		  <div class="container" style="margin: 0 8%;">
 		    <nav class="nav-breadcrumb">
-		      <a href="javascript:void(0);">Detail</a>
-		      <slot></slot>
+		      <a href="javascript:void(0);">详情</a>
+		      <slot>文字与图片概述</slot>
 		    </nav>
 		  </div>
 		</div>
@@ -110,7 +110,8 @@
 				goodsData:{},
 				offset:2,
 				offset2:4,
-				mdShowCart:false
+				mdShowCart:false,
+				checkChange:''
 			}
 		},
 		mounted(){
@@ -142,6 +143,7 @@
 				}).then((resp) =>{
 					let res = resp.data;
 					if(res.status == 0){
+						this.checkChange = this.$route.query.id;
 						this.mdShowCart = true;
 					}
 				})

@@ -17,9 +17,9 @@
 			      <div class="navbar-menu-container">
 				        <!--<a href="/" class="navbar-link">我的账户</a>-->
 				        <a class="navbar-link" v-text="user" v-if="user" @click="toCenter"></a>
-				        <a href="javascript:void(0)" class="navbar-link" @click="login" v-if="!user">Login</a>
-				        <a href="javascript:void(0)" class="navbar-link" @click="register" v-if="!user">Register</a>
-				        <a href="javascript:void(0)" class="navbar-link" v-if="user" @click="logOut">Logout</a>
+				        <a href="javascript:void(0)" class="navbar-link" @click="login" v-if="!user">登录</a>
+				        <a href="javascript:void(0)" class="navbar-link" @click="register" v-if="!user">注册</a>
+				        <a href="javascript:void(0)" class="navbar-link" v-if="user" @click="logOut">注销</a>
 				        <div class="navbar-cart-container">
 					          <span class="navbar-cart-count"></span>
 					          <el-badge :value="cartNum">
@@ -38,8 +38,8 @@
 	  <div class="md-modal modal-msg md-modal-transition" v-bind:class="{'md-show':loginModalFlag}">
           <div class="md-modal-inner">
             <div class="md-top">
-              <div class="md-title">Login in</div>
-              <button class="md-close" @click="loginModalFlag=false">Close</button>
+              <div class="md-title">登录</div>
+              <button class="md-close" @click="loginModalFlag=false">关闭</button>
             </div>
             <div class="md-content">
               <div class="confirm-tips">
@@ -49,15 +49,15 @@
                 <ul>
                   <li class="regi_form_input">
                     <i class="icon IconPeople"></i>
-                    <input type="text" tabindex="1" name="loginname" v-model="userName" class="regi_login_input regi_login_input_left" placeholder="User Name" data-type="loginname">
+                    <input type="text" tabindex="1" name="loginname" v-model="userName" class="regi_login_input regi_login_input_left" placeholder="用户名" data-type="loginname">
                   </li>
                   <li class="regi_form_input noMargin">
                     <i class="icon IconPwd"></i>
-                    <input type="password" tabindex="2"  name="password" v-model="userPwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="Password">
+                    <input type="password" tabindex="2"  name="password" v-model="userPwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="密码">
                   </li>
                   <li class="regi_form_input noMargin">
                     <i class="icon IconPwd"></i>
-                    <input type="text" tabindex="2"  name="yzm" v-model="yzm" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="validationCode" @keyup.enter="toLogin('')">
+                    <input type="text" tabindex="2"  name="yzm" v-model="yzm" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="验证码" @keyup.enter="toLogin('')">
                   </li>
                   <span v-html="validate" @click="getCaptcha"></span>
                 </ul>
@@ -72,8 +72,8 @@
 	  <div class="md-modal modal-msg md-modal-transition" v-bind:class="{'md-show':registerModalFlag}">
           <div class="md-modal-inner">
             <div class="md-top">
-              <div class="md-title">Register</div>
-              <button class="md-close" @click="registerModalFlag=false">Close</button>
+              <div class="md-title">注册</div>
+              <button class="md-close" @click="registerModalFlag=false">关闭</button>
             </div>
             <div class="md-content">
               <div class="confirm-tips">
@@ -83,23 +83,23 @@
                 <ul>
                   <li class="regi_form_input">
                     <i class="icon IconPeople"></i>
-                    <input type="text" tabindex="1" name="loginname" v-model="registerUserName" class="regi_login_input regi_login_input_left" placeholder="User Name" data-type="loginname">
+                    <input type="text" tabindex="1" name="loginname" v-model="registerUserName" class="regi_login_input regi_login_input_left" placeholder="用户名" data-type="loginname">
                   </li>
                   <li class="regi_form_input noMargin">
                     <i class="icon IconPwd"></i>
-                    <input type="password" tabindex="2"  name="password" v-model="registerUserPwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="Password">
+                    <input type="password" tabindex="2"  name="password" v-model="registerUserPwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="密码">
                   </li>
                   <li class="regi_form_input noMargin">
                     <i class="icon IconPwd"></i>
-                    <input type="password" tabindex="3"  name="password" v-model="registerUserRePwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="RePassword" @keyup.enter="toRegister">
+                    <input type="password" tabindex="3"  name="password" v-model="registerUserRePwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="再次输入密码" @keyup.enter="toRegister">
                   </li>
                   <li class="regi_form_input noMargin">
                     <i class="icon IconPwd"></i>
-                    <input type="text" tabindex="4"  name="mail" v-model="mail" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="Email" @keyup.enter="toRegister">
+                    <input type="text" tabindex="4"  name="mail" v-model="mail" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="邮箱地址" @keyup.enter="toRegister">
                   </li>
                   <li class="regi_form_input noMargin">
                     <i class="icon IconPwd"></i>
-                    <input type="text" tabindex="5"  name="mailYzm" v-model="mailYzm" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="EmailValidationCode" @keyup.enter="toRegister">
+                    <input type="text" tabindex="5"  name="mailYzm" v-model="mailYzm" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="邮箱验证码" @keyup.enter="toRegister">
                   </li>
                 </ul>
               </div>
@@ -178,21 +178,33 @@ export default {
    				
 		},
 		sendMail(){
-			axios.post('/users/mailValidation',{
-				mail:this.mail
-			}).then((resp) =>{
-				let res = resp.data.status;
-				if(res == 0){
-					this.time = 60;
-					let interval = setInterval(() =>{
-						this.time--;
-						if(this.time == 0){
-							clearInterval(interval);
-							this.time = '点击发送验证码';
-						}
-					},1000)
-				}
-			})
+			if(this.time == '点击发送验证码'){
+				axios.post('/users/mailValidation',{
+					mail:this.mail
+				}).then((resp) =>{
+					let res = resp.data.status;
+					if(res == 0){
+						this.$message({
+				            type: 'success',
+				            message: '发送验证码成功!'
+				        });
+						this.time = 60;
+						let interval = setInterval(() =>{
+							this.time--;
+							if(this.time == 0){
+								clearInterval(interval);
+								this.time = '点击发送验证码';
+							}
+						},1000)
+					}
+				})
+			}else{
+				this.$message({
+		            type: 'info',
+		            message: '您的验证码已发送!'
+		        });
+			}
+			
 		},
 		getCaptcha(){
 			axios.get('/captcha').then((resp) =>{

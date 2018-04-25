@@ -3,7 +3,7 @@
 		<div class="md-modal modal-msg md-modal-transition" v-bind:class="{'md-show':loginModalFlag}">
           <div class="md-modal-inner">
             <div class="md-top">
-              <div class="md-title">Login in</div>
+              <div class="md-title">管 理 员 登 录</div>
             </div>
             <div class="md-content">
               <div class="confirm-tips">
@@ -13,15 +13,15 @@
                 <ul>
                   <li class="regi_form_input">
                     <i class="icon IconPeople"></i>
-                    <input type="text" tabindex="1" name="loginname" v-model="userName" class="regi_login_input regi_login_input_left" placeholder="User Name" data-type="loginname">
+                    <input type="text" tabindex="1" name="loginname" v-model="userName" class="regi_login_input regi_login_input_left" placeholder="用户名" data-type="loginname">
                   </li>
                   <li class="regi_form_input noMargin">
                     <i class="icon IconPwd"></i>
-                    <input type="password" tabindex="2"  name="password" v-model="userPwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="Password" @keydown.enter="login">
+                    <input type="password" tabindex="2"  name="password" v-model="userPwd" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="密码" @keydown.enter="login">
                   </li>
                   <li class="regi_form_input noMargin">
                     <i class="icon IconPwd"></i>
-                    <input type="text" tabindex="2"  name="yzm" v-model="yzm" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="validationCode" @keydown.enter="login">
+                    <input type="text" tabindex="2"  name="yzm" v-model="yzm" class="regi_login_input regi_login_input_left login-input-no input_text" placeholder="验证码" @keydown.enter="login">
                   </li>
                   <span v-html="validate" @click="getCaptcha"></span>
                 </ul>
