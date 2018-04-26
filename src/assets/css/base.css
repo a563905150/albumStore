@@ -2299,7 +2299,7 @@ html {
   }
 
   .md-modal .md-modal-inner {
-    padding: 0 !important;
+    /*padding: 0 !important;*/
   }
 
   .md-modal .confirm-tips, .md-modal .alert-tips {
@@ -2332,6 +2332,7 @@ html {
     display: -ms-flexbox;
     display: flex;
     margin-top: 0;
+    padding-left: 15%;
   }
 
   .md-modal .btn-wrap .btn {
@@ -2341,12 +2342,12 @@ html {
     flex: 1;
     width: 100%;
     margin: 0;
-    font-size: 12px;
+    /*font-size: 12px;*/
   }
 
   .md-modal .btn-wrap .btn:first-child {
-    border-left: none;
-    border-right: none;
+    /*border-left: none;
+    border-right: none;*/
   }
 
   .md-modal.modal-normal .content-tit {
