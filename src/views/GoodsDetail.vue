@@ -94,6 +94,14 @@
 	          <router-link class="btn btn--m btn--red" href="javascript:;" to="/cart">查看购物车</router-link>
 	        </div>
 	      </modal>
+	      <modal v-bind:mdShow="mdShow" v-on:close="closeModal">
+	          <p slot="message">
+	             	请先登录,否则无法加入到购物车中!
+	          </p>
+	          <div slot="btnGroup">
+	              <a class="btn btn--m" href="javascript:;" @click="mdShow = false">关闭</a>
+	          </div>
+	      </modal>
 	</div>
 </template>
 
@@ -111,7 +119,8 @@
 				offset:2,
 				offset2:4,
 				mdShowCart:false,
-				checkChange:''
+				checkChange:'',
+				mdShow:false
 			}
 		},
 		mounted(){
@@ -137,6 +146,10 @@
 				this.goodsData.productNum++;
 			},
 			addCart(){
+				if(!this.getCookie('userId')){
+					this.mdShow = true;
+					return ;
+				}
 				axios.post('/goods/addCart',{
 					_id:this.$route.query.id,
 					productNum:this.goodsData.productNum
@@ -150,6 +163,17 @@
 			},
 			closeModal(){
 				this.mdShowCart = false;
+				this.mdShow = false;
+			},
+			getCookie(name){
+				let arr;
+		        let reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+		        if (arr = document.cookie.match(reg)){
+		        	return unescape(arr[2]);
+		        }else{
+		        	return null;
+		        }
+	         
 			}
 		},
 		components:{
