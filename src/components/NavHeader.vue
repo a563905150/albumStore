@@ -160,7 +160,11 @@ export default {
  	},
  	computed:{
  		mailTip(){
- 			return this.time;
+ 			if(this.time != '点击发送验证码'){
+ 				return this.time + '秒后重试'
+ 			}else{
+ 				return this.time;
+ 			}
  		}
  	},
  	mounted(){
@@ -246,6 +250,10 @@ export default {
    						this.user = res.data.result.userName;
    						this.cartNum = res.data.result.cartNum;
    						this.loginModalFlag = false;
+   						this.$message({
+			            	type: 'success',
+			            	message: '登录成功!'
+			          	});
    					}
    				})
 			}
