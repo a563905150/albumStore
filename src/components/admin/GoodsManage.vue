@@ -234,7 +234,7 @@
 		    	this.getGoodsList(val);
 		    },
 		    addGoodsComfirm(){
-		    	if(!this.goodsItem.productName||!this.goodsItem.salePrice||!this.imageUrl){
+		    	if(!this.goodsItem.productName||!this.goodsItem.salePrice||!this.imageUrl||!this.goodsItem.productType){
 		    		this.$alert('请填写正确的信息', '错误！', {
 			          confirmButtonText: '确定'
 			        });
@@ -245,6 +245,10 @@
 		    handleSuccess(res,file,fileList){
 //				fileList = [];
 //				this.imageUrl = '';
+				this.goodsItem.productName = '';
+				this.goodsItem.salePrice = '';
+//				this.imageUrl = false;
+				this.goodsItem.productType = '';
 		    	this.dialogFormVisible = false;
 		    	this.getGoodsList();
 		    	this.$message({
