@@ -243,7 +243,8 @@
 		    	this.$refs.upload.submit();
 		    },
 		    handleSuccess(res,file,fileList){
-
+//				fileList = [];
+//				this.imageUrl = '';
 		    	this.dialogFormVisible = false;
 		    	this.getGoodsList();
 		    	this.$message({

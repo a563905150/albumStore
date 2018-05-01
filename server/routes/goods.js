@@ -52,7 +52,7 @@ router.get('/list',(req,res,next)=>{
 		switch (productType){
 			case '0':productType = "爱情";break;
 			case '1':productType = "儿童";break;
-			case '2':productType = "亲情";break;
+			case '2':productType = "家庭";break;
 			case '3':productType = "婚礼";break;
 		}
 		params.productType = productType;
@@ -133,8 +133,8 @@ router.post('/addProduct',(req,res,next)=>{
 	   var file=files.file;
 	 
 	   var oldpath =path.normalize(file.path);//返回正确格式的路径
-	 
-	   var newfilename='xzx'+file.name;
+	   var r = Math.floor(Math.random()*1000000);
+	   var newfilename=r+'xzx'+file.name;
 	   var newpath=uploadDir+newfilename;
 	   var date = new Date().Format('yyyyMMddhhmmss');
 	   //写入数据库的信息
@@ -186,8 +186,8 @@ router.post('/editProduct',(req,res,next)=>{
 	   var file=files.file;
 
 	   var oldpath =path.normalize(file.path);//返回正确格式的路径
-	 
-	   var newfilename='xzx'+file.name;
+	   var r = Math.floor(Math.random()*1000000);
+	   var newfilename=r+'xzx'+file.name;
 	   var newpath=uploadDir+newfilename;
 	 
 	   //写入数据库的信息
