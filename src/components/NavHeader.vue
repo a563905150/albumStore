@@ -320,7 +320,7 @@ export default {
 					this.tip = '请填写正确的用户名和密码！';	
 					return ;
 				}else if(res.status == 0){
-					this.registerModalFlag = false;
+					//this.registerModalFlag = false;
 					this.$message({
 			            type: 'success',
 			            message: '注册成功!'
