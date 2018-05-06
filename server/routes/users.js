@@ -512,17 +512,17 @@ router.post('/mailValidation',(req,res,next) =>{
 	let mailNum = req.body.mail;
 	let randomNum =  Math.floor(Math.random()*100000);
 	let config = {
-        host: 'smtp.163.com', 
+        host: 'smtp.qq.com', 
         port: 465,
         sercure: true,
         auth: {
-            user: '17750406614@163.com', //刚才注册的邮箱账号
-            pass: 'xiaozhixin0'  //邮箱的授权码，不是注册时的密码
+            user: '563905150@qq.com', //刚才注册的邮箱账号
+            pass: 'zejtxvkkmqohbefi'  //邮箱的授权码，不是注册时的密码
         }
     };
     let mail = {
     	// 发件人
-	    from: '相册商城官方<17750406614@163.com>',
+	    from: '相册商城官方<563905150@qq.com>',
 	    // 主题
 	    subject: '注册验证码',
 	    // 收件人
