@@ -45,7 +45,7 @@
 		<el-pagination
 		  background
 		  @current-change="currentChange"
-		  layout="prev, pager, next,total"
+		  layout="prev, pager, next,total,jumper"
 		  :page-size="6"
 		  :total="total"
 		  style="display: inline-block;margin-left: 25%;">

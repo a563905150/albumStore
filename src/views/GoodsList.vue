@@ -45,7 +45,7 @@
 		              </div>
 		              <div class="main">
 		                <div class="name">{{value.productName}}</div>
-		                <div class="price">{{value.salePrice|currency("$")}}</div>
+		                <div class="price">{{value.salePrice|currency("$")}}<span style="margin-left: 100px;">销量{{value.saleNum}}</span></div>
 		                <div class="btn-area">
 		                  <a href="javascript:void(0);" class="btn btn--m" @click="addCart(value._id)">加入购物车</a>
 		                </div>
@@ -58,7 +58,7 @@
 					  background
 					  :current-page="page"
 					  @current-change="currentChange"
-					  layout="prev, pager, next,total"
+					  layout="prev, pager, next,total,jumper"
 					  :page-size="pageSize"
 					  :total="total"
 					  style="display: inline-block;margin-left: 25%;">
@@ -155,7 +155,8 @@
 				checkChange:'',
 				searchValue:'',
 				total:0,
-				noGoods:false
+				noGoods:false,
+				sortPage:1
 			}
 		},
 		components: {
@@ -248,6 +249,9 @@
 				this.defaultCur = false;
 				this.timeCur = false;
 				this.numCur = false;
+				this.timeSortFlag = true;
+				this.numSortFlag = true;
+				this.sortPage = 2;
 				this.flag = false;
 			},
 			TimeSort(){
@@ -259,6 +263,9 @@
 				this.defaultCur = false;
 				this.priceCur = false;
 				this.numCur = false;
+				this.sortFlag = true;
+				this.numSortFlag = true;
+				this.sortPage = 3;
 			},
 			numSort(){
 				this.numSortFlag = !this.numSortFlag;
@@ -269,6 +276,9 @@
 				this.timeCur = false;
 				this.defaultCur = false;
 				this.priceCur = false;
+				this.sortFlag = true;
+				this.timeSortFlag = true;
+				this.sortPage = 4;
 			},
 			toDefaultCur(){
 				this.searchValue = '';
@@ -281,6 +291,7 @@
 				this.sortFlag = true;
 				this.timeSortFlag = true;
 				this.numSortFlag = true;
+				this.sortPage = 1;
 			},
 			loadMore(){
 				this.flag = true;
@@ -319,7 +330,15 @@
 			},
 			currentChange(val){
 				this.page = val;
-				this.getGoodsList();
+				if(this.sortPage == 1){
+					this.getGoodsList();
+				}else if(this.sortPage == 2){
+					this.getGoodsList({'priceSort':this.sortFlag});
+				}else if(this.sortPage == 3){
+					this.getGoodsList({'timeSort':this.timeSortFlag});
+				}else if(this.sortPage == 4){
+					this.getGoodsList({'numSort':this.numSortFlag});
+				}
 			},
 			toGoodsDetail(id){
 				this.$router.push({
