@@ -56,7 +56,7 @@
 		      label="商品图片"
 		      width="200">
 		      <template slot-scope="scope">
-		        <img style="width: 140px;height: 80px;" v-lazy="'../../../static/'+scope.row.productImage" />
+		        <img style="width: 140px;height: 80px;" v-lazy="'../../../static/product/'+scope.row.productImage" />
 		      </template>
 		    </el-table-column>
 		    <el-table-column

@@ -61,7 +61,7 @@
 	      <div class="addr-list-wrap">
 	        <div class="addr-list">
 	          <ul>
-	            <li v-for="(item,index) in addressListFliter" :class="{'check':checkIndex==index}" @click="checkIndex=index;selectAddrId=item._id">
+	            <li v-for="(item,index) in addressListFliter" :class="{'check':checkIndex==index}" @click="checkIndex=index;selectAddrId=item._id;">
 	              <dl>
 	                <dt>姓名: {{item.userName}}</dt>
 	                <dd class="address">住址: {{item.streetName}}</dd>

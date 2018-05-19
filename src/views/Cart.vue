@@ -70,7 +70,7 @@
                     </a>
                   </div>
                   <div class="cart-item-pic" @click="toProductDetail(item._id)" style="cursor: pointer;">
-                    <img :src="'/static/'+item.productImage">
+                    <img :src="'/static/product/'+item.productImage">
                   </div>
                   <div class="cart-item-title"  @click="toProductDetail(item._id)" style="cursor: pointer;">
                     <div class="item-name">{{item.productName}}</div>

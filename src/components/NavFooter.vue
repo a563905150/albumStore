@@ -14,13 +14,10 @@
         <div class="footer__secondary__nav">
           <span>Copyright © 2018 xzx All Rights Reserved.</span>
           <a href="javascript:;">
-            About Us
+            	关于我们
           </a>
           <a href="javascript:;">
-            Terms &amp; Conditions
-          </a>
-          <a href="javascript:;">
-            Privacy Policy
+            条款 &amp; 声明
           </a>
         </div>
       </div>

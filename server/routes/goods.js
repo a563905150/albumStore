@@ -114,7 +114,7 @@ router.get('/list',(req,res,next)=>{
 
 //添加商品
 router.post('/addProduct',(req,res,next)=>{
-	var uploadDir='static/';
+	var uploadDir='static/product/';
 	var form=new formidable.IncomingForm();
 		 //文件的编码格式
 	 form.encoding='utf-8';

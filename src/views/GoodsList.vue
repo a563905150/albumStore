@@ -3,7 +3,7 @@
 		<nav-header :checkChange="checkChange"></nav-header>
 		<nav-bread></nav-bread>
 		<nav-banner></nav-banner>
-		  <el-input placeholder="请输入要查询的商品信息" v-model="searchValue" @keyup.enter="toSearch">
+		  <el-input placeholder="请输入要查询的商品信息" v-model="searchValue" clearable @change="toSearch">
 		    <el-button slot="append" icon="el-icon-search" @click="toSearch"></el-button>
 		  </el-input>
 		<div class="accessory-result-page accessory-page">
@@ -13,7 +13,7 @@
 		      <a href="javascript:void(0)" class="default" :class="{'cur':defaultCur}" @click="toDefaultCur">默认</a>
 		      <a href="javascript:void(0)" class="price" :class="{'cur':priceCur}" @click="sortGoods">价格 <img src="../assets/cc-arrow-down.svg" alt=""v-if="!sortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="sortFlag"/></a>
 		      <a href="javascript:void(0)" class="price" :class="{'cur':timeCur}" @click="TimeSort">最新 <img src="../assets/cc-arrow-down.svg" alt=""v-if="!timeSortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="timeSortFlag"/></a>
-		      <a href="javascript:void(0)" class="price" :class="{'cur':numCur}" @click="numSort">销售数量 <img src="../assets/cc-arrow-down.svg" alt=""v-if="!numSortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="numSortFlag"/></a>
+		      <a href="javascript:void(0)" class="price" :class="{'cur':numCur}" @click="numSort">销量 <img src="../assets/cc-arrow-down.svg" alt=""v-if="!numSortFlag" /><img src="../assets/cc-arrow-up.svg" alt="" v-if="numSortFlag"/></a>
 		      <a href="javascript:void(0)" class="filterby stopPop" @click="showFilter">筛 选</a>
 		    </div>
 		    <div class="accessory-result">
@@ -41,11 +41,11 @@
 		          <ul>
 		            <li v-for="value in goodsList">
 		              <div class="pic" @click="toGoodsDetail(value._id)">
-		                <a href="javascript:void(0);"><img v-lazy="'../../static/'+value.productImage" alt=""></a>
+		                <a href="javascript:void(0);"><img v-lazy="'../../static/product/'+value.productImage" alt=""></a>
 		              </div>
 		              <div class="main">
 		                <div class="name">{{value.productName}}</div>
-		                <div class="price">{{value.salePrice|currency("$")}}<span style="margin-left: 100px;">销量{{value.saleNum}}</span></div>
+		                <div class="price">{{value.salePrice|currency("$")}}<span style="margin-left: 70px;">销量{{value.saleNum}}</span></div>
 		                <div class="btn-area">
 		                  <a href="javascript:void(0);" class="btn btn--m" @click="addCart(value._id)">加入购物车</a>
 		                </div>

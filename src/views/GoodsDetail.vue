@@ -7,7 +7,7 @@
 		<el-row :gutter='20'>
 			 <el-col :span="6" :offset="offset">
 				<div class="productImgWrapper">
-					<img v-lazy="'../../static/'+goodsData.productImage" style="width: 100%;height: 100%;"/>
+					<img v-lazy="'../../static/product/'+goodsData.productImage" style="width: 100%;height: 100%;"/>
 				</div>
 			</el-col>
 			<el-col :span="14">
