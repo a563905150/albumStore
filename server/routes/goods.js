@@ -61,9 +61,9 @@ router.get('/list',(req,res,next)=>{
 		params.productName = new RegExp(searchValue,'i');
 	}
 	sort = JSON.parse(sort);
-	Goods.find({},(err,Doc)=>{
-		total = Doc.length;
-	});
+//	Goods.find({},(err,Doc)=>{
+//		total = Doc.length;
+//	});
 	if(sort.hasOwnProperty('default')){
 		sort = {};
 	}else if(sort.hasOwnProperty('priceSort')){
